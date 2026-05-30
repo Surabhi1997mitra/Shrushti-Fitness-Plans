@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#1a1a1a">
+<title>Srushti — Diet & Workout Plan</title>
+<style>
+:root {
+  --serif: 'Georgia', 'Times New Roman', serif;
+  --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  --ink: #1a1a1a; --ink-mid: #444; --ink-soft: #888;
+  --paper: #faf8f4; --warm: #f2ede4;
+  --accent: #b5451b; --accent-soft: #fdf0eb;
+  --teal: #1a6b5a; --teal-soft: #e6f4f1;
+  --amber-soft: #fdf4e3; --amber: #c17f24;
+  --border: #e2dcd3;
+  --info: #1d56c4; --info-soft: #eef3fd;
+  --purple: #6d4aaf; --purple-soft: #f0eaf8;
+  --nav: 60px;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth;background:var(--paper)}
+body{font-family:var(--sans);color:var(--ink);font-size:15px;line-height:1.7;padding-bottom:calc(var(--nav) + 12px)}
+
+/* BOTTOM NAV */
+.bnav{position:fixed;bottom:0;left:0;right:0;height:var(--nav);background:#111;display:flex;z-index:999;border-top:1px solid rgba(255,255,255,0.07);box-shadow:0 -4px 20px rgba(0,0,0,0.3)}
+.bnav a{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;text-decoration:none;color:rgba(255,255,255,0.38);font-size:9px;letter-spacing:0.06em;text-transform:uppercase;font-family:var(--sans);transition:color 0.15s;padding-bottom:env(safe-area-inset-bottom,0px)}
+.bnav-icon{font-size:18px;line-height:1}
+
+/* COVER */
+#cover{background:var(--ink);color:#fff;padding:52px 22px 52px;position:relative;overflow:hidden}
+#cover::before{content:'';position:absolute;top:-60px;right:-60px;width:260px;height:260px;border-radius:50%;border:1px solid rgba(255,255,255,0.05);pointer-events:none}
+#cover::after{content:'';position:absolute;bottom:-40px;left:20%;width:180px;height:180px;border-radius:50%;border:1px solid rgba(255,255,255,0.03);pointer-events:none}
+.cover-eyebrow{font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:18px}
+.cover-name{font-family:var(--serif);font-size:52px;line-height:1.0;margin-bottom:14px;font-weight:400}
+.cover-name em{color:var(--accent);font-style:italic}
+.cover-sub{font-size:14px;color:rgba(255,255,255,0.45);line-height:1.7;margin-bottom:28px;max-width:300px}
+.cover-pills{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:28px}
+.cpill{font-size:11px;padding:4px 11px;border-radius:20px;border:1px solid rgba(255,255,255,0.14);color:rgba(255,255,255,0.55)}
+.cover-coach{font-family:var(--serif);font-size:18px;font-style:italic;color:rgba(255,255,255,0.5)}
+.cover-role{font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.22);margin-top:3px}
+
+/* SECTION STRUCTURE */
+.sec-anchor{display:block}
+.ph{padding:28px 20px 16px;border-bottom:1px solid var(--border);background:var(--paper)}
+.ph-eye{font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent);margin-bottom:6px}
+.ph-title{font-family:var(--serif);font-size:28px;font-weight:400;line-height:1.15;color:var(--ink)}
+.cx{padding:18px 16px}
+
+/* CARDS */
+.card{background:#fff;border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:12px}
+.card.hi{border-color:var(--accent);border-width:2px}
+.card.hi-teal{border-color:var(--teal);border-width:2px}
+.card.hi-purple{border-color:var(--purple);border-width:2px}
+.ch{padding:13px 15px;background:var(--warm);border-bottom:1px solid var(--border)}
+.ch.acc{background:var(--accent-soft)}
+.ch.teal{background:var(--teal-soft)}
+.ch.info{background:var(--info-soft)}
+.ch.amber{background:var(--amber-soft)}
+.ch.purple{background:var(--purple-soft)}
+.ch.dark{background:#1a1a1a}
+.ct{font-weight:500;font-size:14px;line-height:1.4}
+.ch.acc .ct{color:var(--accent)}
+.ch.teal .ct{color:var(--teal)}
+.ch.info .ct{color:var(--info)}
+.ch.amber .ct{color:var(--amber)}
+.ch.purple .ct{color:var(--purple)}
+.ch.dark .ct{color:#fff}
+.cm{font-size:11px;color:var(--ink-soft);margin-top:3px}
+.ch.dark .cm{color:rgba(255,255,255,0.4)}
+.cb{padding:13px 15px;font-size:13.5px;color:var(--ink-mid);line-height:1.8}
+
+/* ALERTS */
+.al{border-radius:10px;padding:12px 14px;margin-bottom:11px;font-size:13.5px;line-height:1.7}
+.al.d{background:var(--accent-soft);border-left:3px solid var(--accent);color:#7a2a0a}
+.al.w{background:var(--amber-soft);border-left:3px solid var(--amber);color:#5a3a0a}
+.al.ok{background:var(--teal-soft);border-left:3px solid var(--teal);color:#0d3d30}
+.al.i{background:var(--info-soft);border-left:3px solid var(--info);color:#1a3a8a}
+.al.p{background:var(--purple-soft);border-left:3px solid var(--purple);color:#3d2070}
+.al b,.al strong{font-weight:600}
+
+/* NOTES */
+.nt{border-radius:8px;padding:9px 11px;margin-top:10px;font-size:12.5px;line-height:1.65}
+.nt.d{background:var(--accent-soft);color:#7a2a0a}
+.nt.w{background:var(--amber-soft);color:#5a3a0a}
+.nt.ok{background:var(--teal-soft);color:#0d3d30}
+.nt.i{background:var(--info-soft);color:#1a3a8a}
+.nt.p{background:var(--purple-soft);color:#3d2070}
+
+/* BADGES */
+.bx{display:inline-block;font-size:9.5px;font-weight:600;padding:2px 7px;border-radius:20px;margin-left:4px;vertical-align:middle}
+.bx.d{background:var(--accent);color:#fff}
+.bx.ok{background:var(--teal);color:#fff}
+.bx.i{background:var(--info);color:#fff}
+.bx.w{background:var(--amber);color:#fff}
+.bx.p{background:var(--purple);color:#fff}
+.bx.new{background:#1a1a1a;color:#fff}
+
+/* STATS GRID */
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:14px}
+.stats.three{grid-template-columns:1fr 1fr 1fr}
+.st{background:var(--paper);padding:14px 12px}
+.stl{font-size:10px;color:var(--ink-soft);letter-spacing:0.03em;margin-bottom:3px}
+.stv{font-family:var(--serif);font-size:21px;color:var(--ink);line-height:1}
+.stu{font-size:10px;color:var(--ink-soft);margin-top:2px}
+.st.acc{background:var(--accent-soft)}.st.acc .stv{color:var(--accent)}
+.st.tl{background:var(--teal-soft)}.st.tl .stv{color:var(--teal)}
+.st.wn{background:var(--amber-soft)}.st.wn .stv{color:var(--amber)}
+.st.pp{background:var(--purple-soft)}.st.pp .stv{color:var(--purple)}
+
+/* TABLE ROWS */
+.tr{border-bottom:1px solid var(--border);padding:13px 15px}
+.tr:last-child{border-bottom:none}
+.trm{font-size:10px;font-weight:600;color:var(--ink-soft);letter-spacing:0.04em;text-transform:uppercase;margin-bottom:3px}
+.trv{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:3px}
+.trd{font-size:12.5px;color:var(--ink-mid);line-height:1.6}
+
+/* SNACKS */
+.snk{background:var(--warm);border:1px solid var(--border);border-radius:12px;padding:13px 14px;margin-bottom:10px}
+.snkn{font-weight:600;font-size:14px;color:var(--ink);margin-bottom:5px}
+.snkb{font-size:13px;color:var(--ink-mid);line-height:1.7;margin-bottom:5px}
+.snkm{font-size:11px;color:var(--ink-soft)}
+
+/* MACRO BAR */
+.macro-bar{margin:14px 0 6px}
+.macro-bar-label{display:flex;justify-content:space-between;font-size:11px;color:var(--ink-soft);margin-bottom:5px}
+.macro-bar-track{height:6px;background:var(--border);border-radius:10px;overflow:hidden;display:flex;gap:2px}
+.mb-p{background:#1a6b5a;height:100%;border-radius:10px}
+.mb-c{background:#1d56c4;height:100%;border-radius:10px}
+.mb-f{background:#c17f24;height:100%;border-radius:10px}
+.macro-legend{display:flex;gap:12px;margin-top:6px;flex-wrap:wrap}
+.ml-item{display:flex;align-items:center;gap:5px;font-size:10px;color:var(--ink-soft)}
+.ml-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+
+/* DAY TOGGLE */
+.day-toggle-wrap{display:flex;gap:0;border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:14px}
+.day-toggle-btn{flex:1;padding:10px;text-align:center;font-size:12px;font-weight:500;cursor:pointer;background:var(--paper);color:var(--ink-soft);border:none;font-family:var(--sans);transition:all 0.2s}
+.day-toggle-btn.active{background:var(--ink);color:#fff}
+.diet-variant{display:none}
+.diet-variant.active{display:block}
+
+/* WEEK STRIP */
+.week-strip{display:grid;grid-template-columns:repeat(7,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:16px}
+.wday{background:var(--paper);padding:12px 4px;text-align:center}
+.wday.gym{background:#1a1a1a}
+.wday.home{background:var(--info-soft)}
+.wday.rest{background:var(--warm)}
+.wd-name{font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:5px}
+.wday.gym .wd-name{color:rgba(255,255,255,0.4)}
+.wday.home .wd-name{color:var(--info)}
+.wd-icon{font-size:17px;margin-bottom:3px}
+.wd-label{font-size:10px;font-weight:600;color:var(--ink);line-height:1.3}
+.wday.gym .wd-label{color:#6BAF85}
+.wday.home .wd-label{color:var(--info)}
+.wday.rest .wd-label{color:var(--ink-soft)}
+
+/* EXERCISE ROWS */
+.ex-row{border-bottom:1px solid var(--border);padding:11px 15px;display:flex;gap:12px;align-items:flex-start}
+.ex-row:last-child{border-bottom:none}
+.ex-n{width:22px;height:22px;border-radius:6px;background:var(--warm);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:11px;font-weight:600;color:var(--ink-soft);flex-shrink:0;margin-top:2px}
+.ex-row.fire .ex-n{background:#1a1a1a;color:#6BAF85}
+.ex-row.core .ex-n{background:var(--teal-soft);color:var(--teal)}
+.ex-name{font-size:13.5px;font-weight:500;color:var(--ink);margin-bottom:2px}
+.ex-sets{font-size:12px;color:var(--ink-soft)}
+
+/* CORE DIVIDER */
+.core-sep{padding:7px 15px;background:var(--teal-soft);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.core-sep-label{font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--teal)}
+
+/* CIRCUIT */
+.circuit{background:var(--warm);border:1px solid var(--border);border-radius:10px;padding:12px 14px;margin:8px 0}
+.circuit-hd{font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:8px}
+.circuit-row{display:flex;justify-content:space-between;align-items:center;font-size:13px;padding:5px 0;border-bottom:1px solid var(--border)}
+.circuit-row:last-child{border-bottom:none}
+.circuit-reps{font-size:11px;color:var(--ink-soft);flex-shrink:0;margin-left:8px}
+
+/* SECTION LABELS */
+.div{height:1px;background:var(--border);margin:22px 0}
+.slbl{font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent);margin-bottom:7px}
+.stit{font-family:var(--serif);font-size:22px;font-weight:400;line-height:1.2;margin-bottom:13px}
+
+/* INVEST CARD */
+.invest-item{background:#fff;border:1px solid var(--border);border-radius:12px;padding:14px 15px;margin-bottom:10px;display:flex;gap:13px;align-items:flex-start}
+.invest-icon{font-size:26px;flex-shrink:0;margin-top:2px}
+.invest-body{}
+.invest-name{font-weight:600;font-size:14px;color:var(--ink);margin-bottom:3px}
+.invest-desc{font-size:12.5px;color:var(--ink-mid);line-height:1.6;margin-bottom:6px}
+.invest-link{display:inline-block;font-size:11px;font-weight:600;color:var(--teal);text-decoration:none;border:1px solid var(--teal);padding:3px 10px;border-radius:20px}
+
+/* FOOTER */
+.foot{background:var(--ink);color:rgba(255,255,255,0.38);padding:26px 20px;font-size:12px;line-height:1.7;margin-top:6px}
+.footn{font-family:var(--serif);font-size:20px;font-style:italic;color:rgba(255,255,255,0.6);margin-bottom:6px}
+
+/* NOTES SECTION */
+.notes-row{border-bottom:1px solid var(--border);padding:13px 15px}
+.notes-row:last-child{border-bottom:none}
+.notes-label{font-size:10px;font-weight:600;color:var(--ink-soft);letter-spacing:0.04em;text-transform:uppercase;margin-bottom:3px}
+.notes-val{font-size:13.5px;color:var(--ink-mid);line-height:1.7}
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div id="cover">
+  <div class="cover-eyebrow">Fat Loss + Body Recomposition Plan — Phase 1</div>
+  <div class="cover-name">Srushti<br><em>Kadam</em></div>
+  <div class="cover-sub">Fat loss with structure — home + outside food, gym 4×/week, and habits that finally work.</div>
+  <div class="cover-pills">
+    <span class="cpill">157 cm · 69 kg</span>
+    <span class="cpill">Target: 60 kg</span>
+    <span class="cpill">1,550 kcal</span>
+    <span class="cpill">100g Protein</span>
+    <span class="cpill">4× Gym</span>
+    <span class="cpill">Beginner</span>
+    <span class="cpill">Bangalore, KA</span>
+  </div>
+  <div class="cover-coach">Your Coach</div>
+  <div class="cover-role">Fat Loss · Recomposition · Strength · May 2026</div>
+</div>
+
+<!-- ═══════════════════ OVERVIEW ═══════════════════ -->
+<div id="overview" class="sec-anchor"></div>
+<div class="ph">
+  <div class="ph-eye">Overview</div>
+  <div class="ph-title">Your starting point<br>and the plan forward.</div>
+</div>
+<div class="cx">
+
+  <div class="al w"><strong>Why you haven't lost weight despite gym + diet.</strong> This is extremely common, and it's not your fault. Without knowing your actual calorie intake, protein target, and a structured workout progression — most people end up under-eating protein, eating too many hidden calories, and training without enough progression to change their body composition. That's exactly what this plan fixes.</div>
+
+  <div class="div"></div>
+
+  <div class="slbl">Your starting numbers</div>
+  <div class="stats three">
+    <div class="st acc"><div class="stl">Current Weight</div><div class="stv">69 kg</div><div class="stu">Starting point</div></div>
+    <div class="st tl"><div class="stl">Target Weight</div><div class="stv">60 kg</div><div class="stu">−9 kg goal</div></div>
+    <div class="st wn"><div class="stl">Timeline</div><div class="stv">3 mo</div><div class="stu">realistic target</div></div>
+  </div>
+  <div class="stats">
+    <div class="st"><div class="stl">Height</div><div class="stv">157 cm</div><div class="stu">5'2"</div></div>
+    <div class="st"><div class="stl">Age</div><div class="stv">26</div><div class="stu">yrs</div></div>
+  </div>
+
+  <div class="div"></div>
+
+  <div class="slbl">Calorie & macro targets</div>
+  <div class="stit">Why these numbers<br>and how they work.</div>
+
+  <div class="card">
+    <div class="ch teal"><div class="ct">How your targets are set</div></div>
+    <div>
+      <div class="tr"><div class="trm">TDEE (maintenance)</div><div class="trv">~1,850 kcal</div><div class="trd">Based on 69 kg body weight × 1.45 activity multiplier (lightly active desk job + 4× gym). This is roughly what you'd eat to stay the same weight.</div></div>
+      <div class="tr"><div class="trm">Calorie target</div><div class="trv">1,550 kcal · ~300 kcal deficit</div><div class="trd">A moderate deficit — enough to drive consistent fat loss (~1–1.5 kg/month) without tanking energy or muscle. Not a crash diet. Sustainable.</div></div>
+      <div class="tr"><div class="trm">Protein</div><div class="trv">100g — highest priority macro</div><div class="trd">High protein protects muscle while losing fat, keeps you full longer, and is the #1 most under-eaten macro for women trying to recompose their body. Hit this number every single day.</div></div>
+      <div class="tr"><div class="trm">Carbs</div><div class="trv">175g — from low-GI sources</div><div class="trd">Enough to fuel 4 gym sessions without spiking blood sugar unnecessarily. Prioritise rotis, dal, oats, and fruits over rice, bread, and biscuits.</div></div>
+      <div class="tr"><div class="trm">Fat</div><div class="trv">42g</div><div class="trd">Supports hormones and menstrual health. Don't cut fat too aggressively — especially important for women in their 20s.</div></div>
+      <div class="tr"><div class="trm">Fibre</div><div class="trv">25–30g daily</div><div class="trd">Keeps digestion smooth, hunger controlled, and energy stable. Dal, vegetables, rotis, and fruits naturally cover this if the plan is followed.</div></div>
+    </div>
+  </div>
+
+  <div class="stats three">
+    <div class="st tl"><div class="stl">Protein</div><div class="stv">100g</div><div class="stu">Priority #1</div></div>
+    <div class="st"><div class="stl">Carbs</div><div class="stv">175g</div><div class="stu">low-GI sources</div></div>
+    <div class="st wn"><div class="stl">Fat</div><div class="stv">42g</div><div class="stu">hormone support</div></div>
+  </div>
+  <div class="stats">
+    <div class="st acc"><div class="stl">Calorie Target</div><div class="stv">1,550</div><div class="stu">kcal daily</div></div>
+    <div class="st"><div class="stl">Fibre</div><div class="stv">25–30g</div><div class="stu">non-negotiable</div></div>
+  </div>
+
+  <div class="macro-bar">
+    <div class="macro-bar-label"><span>Macro split — 1,550 kcal</span><span>400 + 700 + 378 kcal</span></div>
+    <div class="macro-bar-track">
+      <div class="mb-p" style="width:26%"></div>
+      <div class="mb-c" style="width:45%"></div>
+      <div class="mb-f" style="width:24%"></div>
+    </div>
+    <div class="macro-legend">
+      <div class="ml-item"><div class="ml-dot" style="background:#1a6b5a"></div>Protein 100g · 26%</div>
+      <div class="ml-item"><div class="ml-dot" style="background:#1d56c4"></div>Carbs 175g · 45%</div>
+      <div class="ml-item"><div class="ml-dot" style="background:#c17f24"></div>Fat 42g · 24%</div>
+    </div>
+  </div>
+
+  <div class="div"></div>
+
+  <div class="slbl">Lifestyle flags — address these first</div>
+  <div class="stit">3 things outside the gym<br>slowing your results.</div>
+
+  <div class="card hi">
+    <div class="ch acc"><div class="ct">1 — Sleep: 5–6 hours is not enough</div></div>
+    <div class="cb">This is the biggest hidden blocker. Poor sleep increases cortisol, worsens insulin sensitivity, drives cravings (especially for sugar and carbs), and makes fat loss significantly harder — regardless of how clean your diet is. <strong>Target: 7–8 hours.</strong> Even getting to 7 hours consistently will make a noticeable difference within 2 weeks.
+      <div class="nt d">You cannot out-diet poor sleep. It will slow your results more than any single food choice.</div>
+    </div>
+  </div>
+
+  <div class="card hi">
+    <div class="ch acc"><div class="ct">2 — Water: 1–2L is too low</div></div>
+    <div class="cb">At 69 kg with 4 gym sessions a week, minimum 2.5–3L daily. Dehydration causes false hunger signals, reduces gym performance, and slows metabolism. The simplest habit to fix immediately.
+      <div class="nt w">Start with a 1L bottle at your desk. Finish it by lunch. Refill. Finish it by 6pm. Add a final glass at night. That's 2.5L with zero effort.</div>
+    </div>
+  </div>
+
+  <div class="card hi">
+    <div class="ch acc"><div class="ct">3 — Stress: High</div></div>
+    <div class="cb">High chronic stress keeps cortisol elevated, which promotes fat storage around the belly and makes weight loss slower and harder. The workout plan and protein targets will help. Adding 10 minutes of any wind-down activity before bed (reading, stretching, breathing) goes a long way.
+      <div class="nt w">Alcohol on weekends also raises cortisol and disrupts sleep. Even 1–2 drinks can knock out 2 days of recovery. It doesn't have to be eliminated but keep it to 1 drink, not 2–3.</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════ DIET ═══════════════════ -->
+<div id="diet" class="sec-anchor"></div>
+<div class="ph">
+  <div class="ph-eye">Nutrition</div>
+  <div class="ph-title">Your daily meal plan.<br>Home food + PG meals.</div>
+</div>
+<div class="cx">
+
+  <div class="day-toggle-wrap">
+    <button class="day-toggle-btn active" onclick="showDiet('train', this)">🏋️ Training Day</button>
+    <button class="day-toggle-btn" onclick="showDiet('rest', this)">🛌 Rest Day</button>
+  </div>
+
+  <!-- ── TRAINING DAY ── -->
+  <div class="diet-variant active" id="diet-train">
+
+    <div class="al i"><strong>Training day total: ~1,550 kcal · P 100g · C 175g · F 42g.</strong> Slightly higher carbs to fuel the session and aid recovery. Pre and post-workout meals are not optional on training days.</div>
+
+    <!-- BREAKFAST -->
+    <div class="card">
+      <div class="ch acc"><div class="ct">Breakfast</div><div class="cm">~350 kcal · P 28g · Within 45–60 min of waking</div></div>
+      <div class="cb">
+        <strong>Option A — Egg omelet (preferred):</strong><br>
+        · 1 whole egg + 3 egg whites<br>
+        · Veggies inside if available — onion, capsicum, tomato<br>
+        · 2 multigrain bread slices or 2 rotis<br>
+        · 1 small fruit — apple, guava, or pear<br><br>
+        <strong>Option B — If cooking is not possible (PG):</strong><br>
+        · 3 boiled eggs (eat 1 whole + 2 whites if trying to reduce fat) OR 1 full egg + 2 whole boiled<br>
+        · 2 bread slices from PG OR 1 banana<br>
+        · Black coffee (no sugar) — 1 cup<br>
+        <div class="nt ok">Breakfast sets protein tone for the day. Skipping it almost always results in overeating at lunch or reaching for biscuits/chips mid-morning.</div>
+      </div>
+    </div>
+
+    <!-- LUNCH -->
+    <div class="card">
+      <div class="ch"><div class="ct">Lunch</div><div class="cm">~430 kcal · P 28g · C 55g · 1:00–2:00pm</div></div>
+      <div class="cb">
+        <strong>At PG / home:</strong><br>
+        · Start with salad — cucumber + tomato + onion + lemon + black salt. Before anything else.<br>
+        · 2 rotis (wheat or multigrain) OR 150g cooked rice — not both<br>
+        · 1 cup dal (masoor / rajma / chana / moong — rotate daily)<br>
+        · 1 sabzi — any home sabzi. Palak-based preferred 3×/week.<br>
+        · 100g curd on the side (no sugar)<br><br>
+        <strong>If eating outside (occasionally):</strong><br>
+        · Chicken rice bowl or dal + roti meal — avoid paneer butter masala / biryani / fried items<br>
+        · Best outside options in Bangalore: meals-style thali (without dessert), grilled chicken + roti<br>
+        <div class="nt ok">🍋 Squeeze lemon on dal every day — increases iron absorption from plant food by 2–3×. This matters especially for women.</div>
+      </div>
+    </div>
+
+    <!-- PRE-WORKOUT -->
+    <div class="card">
+      <div class="ch info"><div class="ct">Pre-workout <span class="bx i">30–45 min before gym</span></div><div class="cm">~120 kcal · Quick energy for the session</div></div>
+      <div class="cb">
+        · 1 medium banana<br>
+        · 1 cup black coffee (no sugar)<br>
+        <div class="nt i">The banana gives fast carbs to power the session. Black coffee gives focus and mobilises fat for fuel. Don't train without eating — it kills performance and muscle retention.</div>
+      </div>
+    </div>
+
+    <!-- POST-WORKOUT -->
+    <div class="card">
+      <div class="ch"><div class="ct">Post-workout</div><div class="cm">~160 kcal · Within 30–45 min of finishing</div></div>
+      <div class="cb">
+        · Whey protein shake — 1 scoop with water (25g protein)<br>
+        · 1 small fruit (orange or guava) — optional<br>
+        <div class="nt w">This meal is about protein delivery to muscle — timing matters here. Don't delay more than 1 hour post-gym. See supplement section below for whey recommendation.</div>
+      </div>
+    </div>
+
+    <!-- DINNER -->
+    <div class="card hi">
+      <div class="ch acc"><div class="ct">Dinner <span class="bx d">Highest protein meal</span></div><div class="cm">~480 kcal · P 35g · C 35g · 7:30–9:00pm</div></div>
+      <div class="cb">
+        <strong>Salad first — always.</strong><br><br>
+        <strong>Protein — choose one:</strong><br>
+        · 150–180g chicken — grilled, air fried, or dry sabzi style <span class="bx ok">best option</span><br>
+        · 3 whole eggs — bhurji, omelet, or boiled <span class="bx w">if no chicken available</span><br>
+        · 100g paneer — palak paneer or bhurji <span class="bx new">veg option</span><br><br>
+        · 2 rotis (training day)<br>
+        · 1 cup sabzi<br>
+        · 1 small bowl curd<br>
+        <div class="nt d">No rice at dinner. 2 rotis are sufficient carbs for overnight recovery. Keeping dinner lower in carbs and higher in protein accelerates fat loss during sleep.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── REST DAY ── -->
+  <div class="diet-variant" id="diet-rest">
+
+    <div class="al i"><strong>Rest day total: ~1,500 kcal · P 100g · C 140g · F 45g.</strong> Fewer carbs — no gym session to fuel. Fats go slightly higher to compensate. Same protein target — muscle doesn't take days off.</div>
+
+    <!-- BREAKFAST -->
+    <div class="card">
+      <div class="ch acc"><div class="ct">Breakfast</div><div class="cm">~320 kcal · 8:00–9:00am (slightly later is fine)</div></div>
+      <div class="cb">
+        · 1 whole egg + 3 egg whites as omelet<br>
+        · 1–2 rotis or 2 multigrain bread slices<br>
+        · Black coffee (no sugar)<br>
+        · 1 small fruit
+        <div class="nt ok">No urgency to eat very early on rest days. A slightly later breakfast naturally narrows the eating window and makes the deficit easier to hit.</div>
+      </div>
+    </div>
+
+    <!-- LUNCH -->
+    <div class="card">
+      <div class="ch"><div class="ct">Lunch</div><div class="cm">~420 kcal · 1:00–2:00pm</div></div>
+      <div class="cb">
+        <strong>Salad first.</strong><br><br>
+        · 2 rotis — wheat or multigrain<br>
+        · 1 cup dal<br>
+        · 1 sabzi — any home style<br>
+        · 100g curd<br>
+        <div class="nt ok">🍋 Lemon on dal — mandatory. Iron absorption protocol does not take rest days.</div>
+      </div>
+    </div>
+
+    <!-- EVENING SNACK -->
+    <div class="card">
+      <div class="ch"><div class="ct">Evening snack <span class="bx w">replaces pre-workout</span></div><div class="cm">~120 kcal · 4:30–5:30pm</div></div>
+      <div class="cb">
+        · 30g roasted chana<br>
+        · OR 1 small bowl curd with jeera and black salt<br>
+        · OR 4–5 walnuts + 1 small fruit<br>
+        · Black coffee or green tea (no sugar)
+      </div>
+    </div>
+
+    <!-- DINNER -->
+    <div class="card hi">
+      <div class="ch acc"><div class="ct">Dinner <span class="bx d">High protein, lower carb</span></div><div class="cm">~430 kcal · 7:30–8:30pm</div></div>
+      <div class="cb">
+        <strong>Salad first.</strong><br><br>
+        · 150–180g chicken grilled or dry sabzi <span class="bx ok">primary</span><br>
+        · OR 3 whole eggs <span class="bx w">if no chicken</span><br>
+        · 1 roti only on rest days (not 2)<br>
+        · Large bowl sabzi<br>
+        · 1 bowl curd (100g)
+        <div class="nt ok">Rest day dinners are intentionally lighter on carbs. The protein stays the same — this is what maintains muscle while in a deficit.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="div"></div>
+
+  <!-- SNACKS -->
+  <div class="slbl">Smart snacks · if hunger hits</div>
+  <div class="stit">Choose from these —<br>not from whatever's nearby.</div>
+
+  <div class="snk"><div class="snkn">1. Roasted chana — 30g</div><div class="snkb">Best all-round snack. High in protein, fibre, and iron. Keeps hunger away for hours without a glucose spike. Keep a small dabba at your desk.</div><div class="snkm">~110 kcal · P 7g · Iron-rich · Low GI · Easy to carry</div></div>
+  <div class="snk"><div class="snkn">2. Boiled eggs — 2 whites + 1 whole</div><div class="snkb">If you can boil eggs at your PG — this is the highest protein, most filling snack on the list. Eat with black salt and jeera.</div><div class="snkm">~110 kcal · P 15g · Very filling · Zero sugar</div></div>
+  <div class="snk"><div class="snkn">3. Walnuts — 4–5 halves</div><div class="snkb">High in healthy fats and anti-inflammatory. Eat slowly — they're calorie-dense. Don't exceed 5 halves as a snack.</div><div class="snkm">~90 kcal · Omega-3 · Brain and hormone health</div></div>
+  <div class="snk"><div class="snkn">4. Plain curd — 150g</div><div class="snkb">No sugar, no fruit mix. Add roasted jeera and black salt. Cool, filling, and gut-friendly. Better than any "diet" packaged snack.</div><div class="snkm">~90 kcal · P 8g · Probiotic · High protein for calories</div></div>
+  <div class="snk"><div class="snkn">5. Makhana (fox nuts) — 1 bowl (20–25g)</div><div class="snkb">Light, crunchy, and very filling. Dry roast with black salt and jeera. Low calorie, low GI, very easy to snack on without overeating.</div><div class="snkm">~90 kcal · Low fat · Low GI · Easy desk snack</div></div>
+  <div class="snk"><div class="snkn">6. Banana — 1 medium</div><div class="snkb">Best consumed pre-workout. Avoid as a random snack — too much sugar without protein to balance it. Always pair with protein (curd, egg, or whey) if eating it outside workout context.</div><div class="snkm">~90 kcal · Fast carbs · Best used pre-gym</div></div>
+  <div class="snk"><div class="snkn">7. Cucumber — unlimited</div><div class="snkb">Slice and eat with black salt and lemon. Zero guilt, very hydrating. Kills hunger without adding anything to the calorie count. Always keep some in your PG fridge.</div><div class="snkm">~15 kcal per cup · 97% water · Zero sugar</div></div>
+  <div class="snk"><div class="snkn">8. Green tea — 1–2 cups/day</div><div class="snkb">Drink instead of snacking when the craving is more boredom than actual hunger. Slightly appetite-suppressing, zero calories. Avoid adding sugar or honey.</div><div class="snkm">~0 kcal · Light metabolism support · No sugar</div></div>
+
+  <div class="al ok"><strong>Hunger on a deficit is normal</strong> — especially in the first 2 weeks. Drink 1 full glass of water first and wait 10–15 minutes. If still hungry, eat from the list above. Cucumber is unlimited.</div>
+
+  <div class="div"></div>
+
+  <!-- SUPPLEMENT -->
+  <div class="slbl">Supplement · one to start with</div>
+  <div class="stit">Just one —<br>and it makes a real difference.</div>
+
+  <div class="invest-item">
+    <div class="invest-icon">🥤</div>
+    <div class="invest-body">
+      <div class="invest-name">Whey Protein (1 scoop post-workout)</div>
+      <div class="invest-desc">At 1,550 kcal, hitting 100g of protein daily from food alone is genuinely hard — especially from PG meals. One scoop of whey post-workout adds ~24–25g of protein with very few calories and takes 30 seconds to make. Recommended: NAKPRO Impact Whey or MuscleBlaze Raw Whey. Both are affordable and clean. Buy from Amazon or Healthkart — avoid local stores where fakes are common.</div>
+    </div>
+  </div>
+
+  <div class="al i"><strong>No other supplements needed right now.</strong> No fat burners, no appetite suppressants, no pre-workout powders. Once blood reports are done (which we will recommend at the 6-week mark), we can check Vitamin D and iron levels and add supplements if needed.</div>
+
+</div>
+
+<!-- ═══════════════════ WORKOUT ═══════════════════ -->
+<div id="workout" class="sec-anchor"></div>
+<div class="ph">
+  <div class="ph-eye">Training</div>
+  <div class="ph-title">Your workout plan.<br>Lower · Push · Lower · Pull.</div>
+</div>
+<div class="cx">
+
+  <div class="slbl">Weekly structure</div>
+  <div class="week-strip">
+    <div class="wday gym"><div class="wd-name">Mon</div><div class="wd-icon">🏋️</div><div class="wd-label">Lower 1</div></div>
+    <div class="wday gym"><div class="wd-name">Tue</div><div class="wd-icon">💪</div><div class="wd-label">Push</div></div>
+    <div class="wday rest"><div class="wd-name">Wed</div><div class="wd-icon">🚶</div><div class="wd-label">Rest + Walk</div></div>
+    <div class="wday gym"><div class="wd-name">Thu</div><div class="wd-icon">🏋️</div><div class="wd-label">Lower 2</div></div>
+    <div class="wday gym"><div class="wd-name">Fri</div><div class="wd-icon">🔙</div><div class="wd-label">Pull</div></div>
+    <div class="wday rest"><div class="wd-name">Sat</div><div class="wd-icon">🧘</div><div class="wd-label">Rest / Walk</div></div>
+    <div class="wday rest"><div class="wd-name">Sun</div><div class="wd-icon">🌿</div><div class="wd-label">Full Rest</div></div>
+  </div>
+  <div class="nt i" style="margin-bottom:14px">Days can be swapped based on availability — what matters is the sequence: Lower → Push → Rest → Lower → Pull. Always at least 1 rest day between lower body sessions. Keep daily steps at 8,000–10,000 on all days including rest days — this is already your habit, maintain it.</div>
+
+  <div class="slbl">Gym sessions · 3 sets each · beginner pace</div>
+  <div class="stit">4 sessions per week.<br>Form before weight — always.</div>
+
+  <!-- LOWER BODY 1 -->
+  <div class="card">
+    <div class="ch dark"><div class="ct">Lower Body 1 — Glutes & Hamstrings</div><div class="cm">Posterior chain · Mon · ~45 min</div></div>
+    <div>
+      <div class="ex-row fire"><div class="ex-n">1</div><div><div class="ex-name">Hip Thrusts with Barbell or Dumbbell <span class="bx d">Focus lift</span></div><div class="ex-sets">3 × 12 reps · Learn form in week 1 with bodyweight only, add load from week 2</div></div></div>
+      <div class="ex-row"><div class="ex-n">2</div><div><div class="ex-name">Romanian Deadlifts (RDLs) — Dumbbell</div><div class="ex-sets">3 × 10 reps · Hinge from hips, soft knee bend, feel the hamstring stretch</div></div></div>
+      <div class="ex-row"><div class="ex-n">3</div><div><div class="ex-name">Hamstring Curls on Machine</div><div class="ex-sets">3 × 15 reps · Slow on the way down — the eccentric phase matters</div></div></div>
+      <div class="ex-row"><div class="ex-n">4</div><div><div class="ex-name">Abduction Machine (Hip Abductor)</div><div class="ex-sets">3 × 15 reps · Full range, controlled movement. No slamming the plates.</div></div></div>
+      <div class="ex-row"><div class="ex-n">5</div><div><div class="ex-name">Glute Kickback on Cable</div><div class="ex-sets">3 × 12 reps each side · Squeeze at the top of each rep</div></div></div>
+      <div class="ex-row"><div class="ex-n">6</div><div><div class="ex-name">Standing Calf Raise (Machine or Smith)</div><div class="ex-sets">3 × 20 reps · Full stretch at the bottom</div></div></div>
+    </div>
+  </div>
+
+  <!-- PUSH -->
+  <div class="card">
+    <div class="ch dark"><div class="ct">Push Day — Chest, Shoulders & Triceps</div><div class="cm">Upper body push · Tue · ~45 min · Warm up first</div></div>
+    <div>
+      <div class="ex-row"><div class="ex-n">W</div><div><div class="ex-name">Wall Push-ups / Incline Push-ups (warm-up)</div><div class="ex-sets">2 sets of 10 — opens up shoulders before loading. Do not skip.</div></div></div>
+      <div class="ex-row fire"><div class="ex-n">1</div><div><div class="ex-name">Chest Press on Machine <span class="bx d">Start here before barbell</span></div><div class="ex-sets">3 × 12–15 reps · Light-to-moderate weight, full range</div></div></div>
+      <div class="ex-row"><div class="ex-n">2</div><div><div class="ex-name">Chest Fly on Machine</div><div class="ex-sets">3 × 12 reps · Slow and controlled — feel the chest stretch at the top</div></div></div>
+      <div class="ex-row"><div class="ex-n">3</div><div><div class="ex-name">Seated Dumbbell Shoulder Press</div><div class="ex-sets">3 × 10–12 reps · Light dumbbells, strict form, no leaning back</div></div></div>
+      <div class="ex-row"><div class="ex-n">4</div><div><div class="ex-name">Lateral Raises <span class="bx i">Superset</span></div><div class="ex-sets">12 reps · paired with Front Plate Raises · 10 reps · No rest between the pair</div></div></div>
+      <div class="ex-row"><div class="ex-n">5</div><div><div class="ex-name">Tricep Pushdown on Cable <span class="bx i">Superset</span></div><div class="ex-sets">12 reps · paired with Overhead Tricep Extension (rope or dumbbell) · 10 reps</div></div></div>
+      <div class="core-sep"><div class="core-sep-label">Core Finisher — Push Day</div></div>
+      <div class="ex-row core"><div class="ex-n">C1</div><div><div class="ex-name">Dead Bug</div><div class="ex-sets">3 × 10 reps each side · arm and opposite leg lower together · lower back stays flat — do not arch</div></div></div>
+      <div class="ex-row core"><div class="ex-n">C2</div><div><div class="ex-name">Plank Hold</div><div class="ex-sets">3 × 20–40 sec · elbows under shoulders · hips level · build to 60 sec over the 3-month plan</div></div></div>
+    </div>
+  </div>
+
+  <!-- LOWER BODY 2 -->
+  <div class="card">
+    <div class="ch dark"><div class="ct">Lower Body 2 — Quads, Adductors & Core</div><div class="cm">Quad focus · Thu · ~45 min</div></div>
+    <div>
+      <div class="ex-row fire"><div class="ex-n">1</div><div><div class="ex-name">Goblet Squat / Barbell Squat <span class="bx d">Foundation lift</span></div><div class="ex-sets">3 × 12 reps · Start with goblet squat (dumbbell held at chest) — master form before switching to barbell</div></div></div>
+      <div class="ex-row"><div class="ex-n">2</div><div><div class="ex-name">Leg Extension Machine</div><div class="ex-sets">3 × 15 reps · Squeeze the quad at the top · Full range of motion</div></div></div>
+      <div class="ex-row"><div class="ex-n">3</div><div><div class="ex-name">Reverse Lunges with Dumbbell</div><div class="ex-sets">3 × 10 reps each leg · Step back, not forward · Keeps more stress on glute and quad</div></div></div>
+      <div class="ex-row"><div class="ex-n">4</div><div><div class="ex-name">Adduction Machine (Inner Thigh)</div><div class="ex-sets">3 × 15 reps · Comfortable range, no ego loading. Controlled movement.</div></div></div>
+      <div class="ex-row"><div class="ex-n">5</div><div><div class="ex-name">Wall Sit</div><div class="ex-sets">3 × 30–45 sec · Quads parallel to floor · Great burnout at the end</div></div></div>
+      <div class="core-sep"><div class="core-sep-label">Core Finisher — Lower Day 2</div></div>
+      <div class="ex-row core"><div class="ex-n">C1</div><div><div class="ex-name">Reverse Crunches</div><div class="ex-sets">3 × 15 reps · Lift hips off the ground at the top · lower abs focus</div></div></div>
+      <div class="ex-row core"><div class="ex-n">C2</div><div><div class="ex-name">Bicycle Crunches</div><div class="ex-sets">3 × 20 reps (10 each side) · Slow and controlled, elbows to opposite knee — no rushing</div></div></div>
+    </div>
+  </div>
+
+  <!-- PULL -->
+  <div class="card">
+    <div class="ch dark"><div class="ct">Pull Day — Back & Biceps</div><div class="cm">Upper body pull · Fri · ~45 min · Core at the end</div></div>
+    <div>
+      <div class="ex-row fire"><div class="ex-n">1</div><div><div class="ex-name">Assisted Pull-Ups or Lat Pulldown <span class="bx d">Primary</span></div><div class="ex-sets">3 sets · Assisted pull-ups: as many clean reps as possible. Lat pulldown if machine only available: 3 × 12 reps</div></div></div>
+      <div class="ex-row"><div class="ex-n">2</div><div><div class="ex-name">Seated Cable Row</div><div class="ex-sets">3 × 12 reps · Drive elbows back, squeeze shoulder blades at the end</div></div></div>
+      <div class="ex-row"><div class="ex-n">3</div><div><div class="ex-name">Single Arm Dumbbell Row</div><div class="ex-sets">3 × 10 reps each side · Support yourself on bench · Full range — let the shoulder drop, then pull through</div></div></div>
+      <div class="ex-row"><div class="ex-n">4</div><div><div class="ex-name">Reverse Fly on Machine (Rear Delt)</div><div class="ex-sets">3 × 12–15 reps · Slow eccentric · Don't use momentum</div></div></div>
+      <div class="ex-row"><div class="ex-n">5</div><div><div class="ex-name">Dumbbell Bicep Curl <span class="bx i">Superset</span></div><div class="ex-sets">12 reps · paired with Hammer Curl · 10 reps · No rest between the pair</div></div></div>
+      <div class="core-sep"><div class="core-sep-label">Core Finisher — Pull Day</div></div>
+      <div class="ex-row core"><div class="ex-n">C1</div><div><div class="ex-name">Russian Twists</div><div class="ex-sets">3 × 20 reps (10 each side) · Feet slightly elevated · Use bodyweight first, add a plate in week 3+</div></div></div>
+      <div class="ex-row core"><div class="ex-n">C2</div><div><div class="ex-name">Flutter Kicks</div><div class="ex-sets">3 × 30 sec · Hands under lower back · Legs stay low, not up high — that's what makes it hard</div></div></div>
+    </div>
+  </div>
+
+  <div class="nt ok" style="margin-bottom:16px"><strong>Progressive overload — this is the key.</strong> When all reps are clean for 2 sessions in a row, add a small amount of weight next session. This is what changes the body — not just showing up. Rest: 60–90s between isolation exercises, 90–120s between compounds (squats, deadlifts). Core finisher: 45s rest, keep intensity up.</div>
+
+  <div class="div"></div>
+
+  <div class="card">
+    <div class="ch teal"><div class="ct">10,000 Steps — Every Day <span class="bx ok">Already your habit</span></div></div>
+    <div class="cb">
+      You're already hitting 8,000–12,000 steps daily — this is excellent and one of the reasons your fat loss will accelerate quickly with the right diet in place. Maintain this on gym days, rest days, and all days. This contributes significantly to your TDEE and is not replaceable with gym sessions.
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><div class="ct">Training notes — beginner reminders</div></div>
+    <div>
+      <div class="tr"><div class="trm">Form before weight</div><div class="trd">Week 1 is about learning the movement patterns. Lighter weight, more reps, focus on feeling the right muscle working. Add weight from week 2 onwards once form is dialled in.</div></div>
+      <div class="tr"><div class="trm">Never train fasted</div><div class="trd">Always have the pre-workout banana + coffee before the session. Training without fuel (especially at a calorie deficit) burns muscle, not just fat.</div></div>
+      <div class="tr"><div class="trm">Hydration during gym</div><div class="trd">500ml–750ml water during the session. Dehydration kills performance and makes sessions feel unnecessarily hard.</div></div>
+      <div class="tr"><div class="trm">Sleep is training</div><div class="trd">Recovery happens during sleep — this is when muscle is built and fat is mobilised. 5–6 hours is not enough. Getting to 7 hours will measurably improve how you feel and how fast your body changes.</div></div>
+      <div class="tr"><div class="trm">Soreness vs pain</div><div class="trd">Muscle soreness (especially 24–48 hours after a session) is normal as a beginner. Sharp pain during a movement is not — stop and report it. Soreness reduces within 2–3 weeks as the body adapts.</div></div>
+      <div class="tr"><div class="trm">Blood reports — recommended</div><div class="trd">No current blood reports on file. Recommend a basic panel (CBC, Vitamin D, iron, thyroid) at the 6-week mark to check for any deficiencies that could be slowing progress.</div></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════ NOTES ═══════════════════ -->
+<div id="notes" class="sec-anchor"></div>
+<div class="ph">
+  <div class="ph-eye">Notes</div>
+  <div class="ph-title">Coach notes &amp;<br>things to track.</div>
+</div>
+<div class="cx">
+
+  <div class="slbl">Check-in tracker</div>
+  <div class="card">
+    <div class="ch teal"><div class="ct">What to send every day on WhatsApp</div></div>
+    <div>
+      <div class="notes-row"><div class="notes-label">Morning</div><div class="notes-val">Weight (after washroom, before food) + how sleep was last night</div></div>
+      <div class="notes-row"><div class="notes-label">After gym</div><div class="notes-val">Quick note on session — what you trained, how energy felt, any soreness</div></div>
+      <div class="notes-row"><div class="notes-label">Evening</div><div class="notes-val">Meals eaten today (rough) + water intake + steps count</div></div>
+    </div>
+  </div>
+
+  <div class="div"></div>
+
+  <div class="slbl">Progress milestones</div>
+  <div class="card">
+    <div class="ch amber"><div class="ct">What to expect and when</div></div>
+    <div>
+      <div class="notes-row"><div class="notes-label">Week 1–2</div><div class="notes-val">Mostly water weight + bloating reduction. Scale may drop 1–2 kg. Energy might feel lower as the body adapts to deficit — this is normal.</div></div>
+      <div class="notes-row"><div class="notes-label">Week 3–4</div><div class="notes-val">Actual fat loss begins. Expect 0.5–1 kg loss per week if adherence is good. Gym sessions should start feeling more familiar.</div></div>
+      <div class="notes-row"><div class="notes-label">Month 2</div><div class="notes-val">Body composition starts visibly changing — not just scale weight. Clothes fit differently. Strength in gym should be going up consistently.</div></div>
+      <div class="notes-row"><div class="notes-label">Month 3</div><div class="notes-val">Target review at 90 days. Blood reports recommended. Calorie and workout plan to be adjusted based on new weight and progress.</div></div>
+    </div>
+  </div>
+
+  <div class="div"></div>
+
+  <div class="slbl">Measurements to track</div>
+  <div class="card">
+    <div class="ch"><div class="ct">Starting measurements · May 2026</div></div>
+    <div>
+      <div class="notes-row"><div class="notes-label">Weight</div><div class="notes-val">69 kg</div></div>
+      <div class="notes-row"><div class="notes-label">Chest</div><div class="notes-val">34 inches</div></div>
+      <div class="notes-row"><div class="notes-label">Waist</div><div class="notes-val">34 inches</div></div>
+      <div class="notes-row"><div class="notes-label">Hips</div><div class="notes-val">To be measured</div></div>
+      <div class="notes-row"><div class="notes-label">Thighs</div><div class="notes-val">To be measured</div></div>
+      <div class="notes-row"><div class="notes-label">Next measurement check</div><div class="notes-val">4 weeks · End of May 2026</div></div>
+    </div>
+  </div>
+
+  <div class="div"></div>
+
+  <div class="slbl">Coach notes</div>
+  <div class="card">
+    <div class="ch acc"><div class="ct">Key things to watch in Phase 1</div></div>
+    <div class="cb">
+      · Sleep is the biggest variable — track it closely and flag if consistently under 6 hrs<br>
+      · Water intake needs to double from current 1–2L. Check in on this weekly.<br>
+      · Beginner — form on lower body compound lifts (RDLs, squats, hip thrusts) needs to be confirmed in Week 1–2 before progressive loading<br>
+      · No blood reports on file — recommend basic panel (CBC, Vitamin D, iron, thyroid) at 6-week mark<br>
+      · High stress flagged — monitor for emotional eating patterns, especially on weekdays
+      <div class="nt w">Alcohol on weekends: each drink adds 100–150 empty calories, disrupts sleep quality, and increases next-day cravings. Discuss in Week 2 check-in if it's a consistent habit.</div>
+    </div>
+  </div>
+
+</div>
+
+<div class="foot">
+  <div class="footn">Srushti Kadam</div>
+  Fat Loss · Body Recomposition · Strength Foundation<br>
+  Plan — May 2026 · Phase 1 of 3 months<br>
+  Female · 26 yrs · 69 kg · 157 cm · Non-Veg · 4× Gym · Bangalore, KA<br><br>
+  <span style="font-size:11px;color:rgba(255,255,255,0.18)">This plan is for fitness purposes only and does not replace medical advice. Please consult a physician before beginning any new fitness programme.</span>
+</div>
+
+<nav class="bnav">
+  <a href="#overview" onclick="hl(this)"><span class="bnav-icon">📊</span>Overview</a>
+  <a href="#diet" onclick="hl(this)"><span class="bnav-icon">🍽</span>Diet</a>
+  <a href="#workout" onclick="hl(this)"><span class="bnav-icon">🏋️</span>Workout</a>
+  <a href="#notes" onclick="hl(this)"><span class="bnav-icon">📋</span>Notes</a>
+</nav>
+
+<script>
+function showDiet(type, btn) {
+  document.querySelectorAll('.diet-variant').forEach(d => d.classList.remove('active'));
+  document.querySelectorAll('.day-toggle-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('diet-' + type).classList.add('active');
+  btn.classList.add('active');
+}
+function hl(el) {
+  document.querySelectorAll('.bnav a').forEach(a => a.style.color = '');
+  el.style.color = '#fff';
+  setTimeout(() => { el.style.color = ''; }, 800);
+}
+const anchors = ['overview','diet','workout','notes'];
+const navLinks = document.querySelectorAll('.bnav a');
+function updateNav() {
+  let c = anchors[0];
+  anchors.forEach(id => {
+    const el = document.getElementById(id);
+    if (el && window.scrollY >= el.offsetTop - 80) c = id;
+  });
+  navLinks.forEach(a => {
+    a.style.color = a.getAttribute('href') === '#' + c ? '#ffffff' : '';
+  });
+}
+window.addEventListener('scroll', updateNav, { passive: true });
+updateNav();
+</script>
+</body>
+</html>
